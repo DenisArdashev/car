@@ -1,21 +1,21 @@
-#include <iostream>
+п»ї#include <iostream>
 #include <conio.h>
 #include <thread>
 #include <Windows.h>
 using namespace std;
 using namespace std::literals::chrono_literals;
 enum Color { Black = 0, Blue, Green, Cyan, Red, Magenta, Brown, LightGray, DarkGray, LightBlue, LightGreen, LightCyan, LightRed, LightMagenta, Yellow, White };
-HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);//получает дискриптор активного окна
+HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);//РїРѕР»СѓС‡Р°РµС‚ РґРёСЃРєСЂРёРїС‚РѕСЂ Р°РєС‚РёРІРЅРѕРіРѕ РѕРєРЅР°
 void SetColor(Color text, Color background)
 {
 	SetConsoleTextAttribute(hStdOut, (WORD)((background << 4) | text));
 }
-//# показывает что дальше идёт директива, 
-// директива  - это указание компилятору на выполнение некоторых действий.
-// Директива include(Включить в состав) указывает компилятору на то, что к нашему исходному файлу нужно 
-// подключить другой файл
-// Директива define (определить) создаёт макроопределение(Макрос) типа ИМЯ ЗНАЧЕНИЯ
-// везде где компилятор видит имя макроса вставляет значение макроса
+//# РїРѕРєР°Р·С‹РІР°РµС‚ С‡С‚Рѕ РґР°Р»СЊС€Рµ РёРґС‘С‚ РґРёСЂРµРєС‚РёРІР°, 
+// РґРёСЂРµРєС‚РёРІР°  - СЌС‚Рѕ СѓРєР°Р·Р°РЅРёРµ РєРѕРјРїРёР»СЏС‚РѕСЂСѓ РЅР° РІС‹РїРѕР»РЅРµРЅРёРµ РЅРµРєРѕС‚РѕСЂС‹С… РґРµР№СЃС‚РІРёР№.
+// Р”РёСЂРµРєС‚РёРІР° include(Р’РєР»СЋС‡РёС‚СЊ РІ СЃРѕСЃС‚Р°РІ) СѓРєР°Р·С‹РІР°РµС‚ РєРѕРјРїРёР»СЏС‚РѕСЂСѓ РЅР° С‚Рѕ, С‡С‚Рѕ Рє РЅР°С€РµРјСѓ РёСЃС…РѕРґРЅРѕРјСѓ С„Р°Р№Р»Сѓ РЅСѓР¶РЅРѕ 
+// РїРѕРґРєР»СЋС‡РёС‚СЊ РґСЂСѓРіРѕР№ С„Р°Р№Р»
+// Р”РёСЂРµРєС‚РёРІР° define (РѕРїСЂРµРґРµР»РёС‚СЊ) СЃРѕР·РґР°С‘С‚ РјР°РєСЂРѕРѕРїСЂРµРґРµР»РµРЅРёРµ(РњР°РєСЂРѕСЃ) С‚РёРїР° РРњРЇ Р—РќРђР§Р•РќРРЇ
+// РІРµР·РґРµ РіРґРµ РєРѕРјРїРёР»СЏС‚РѕСЂ РІРёРґРёС‚ РёРјСЏ РјР°РєСЂРѕСЃР° РІСЃС‚Р°РІР»СЏРµС‚ Р·РЅР°С‡РµРЅРёРµ РјР°РєСЂРѕСЃР°
 //#define MIN_TANK_VOLUME 20
 //#define MAX_TANK_VOLUME 80
 
@@ -28,8 +28,8 @@ class Tank
 	static const int MIN_TANK_VOLUME = 20;
 	static const int MAX_TANK_VOLUME = 80;
 
-	const int VOLUME; //объем бака
-	double fuel_level; //уровень топлива
+	const int VOLUME; //РѕР±СЉРµРј Р±Р°РєР°
+	double fuel_level; //СѓСЂРѕРІРµРЅСЊ С‚РѕРїР»РёРІР°
 public:
 	int getVOLUME()const
 	{
@@ -173,7 +173,7 @@ public:
 	void get_in()
 	{
 		driver_inside = true;
-		threads.panel_thread = std::thread(&Car::panel, this); //запускаем метод panel() в потоке panel_thread				
+		threads.panel_thread = std::thread(&Car::panel, this); //Р·Р°РїСѓСЃРєР°РµРј РјРµС‚РѕРґ panel() РІ РїРѕС‚РѕРєРµ panel_thread				
 	}
 	void get_out()
 	{
@@ -208,7 +208,7 @@ public:
 			switch (key)
 			{
 			case Enter: driver_inside ? get_out() : get_in(); break;
-			case 'I': case 'i': //Ignition - зажигание
+			case 'I': case 'i': //Ignition - Р·Р°Р¶РёРіР°РЅРёРµ
 				engine.started() ? stop_engine() : start_engine();
 				break;
 			case 'w': case 'W':		
@@ -229,7 +229,7 @@ public:
 				else
 				{
 					double amount;
-					cout << "Введите объём топлива: "; cin >> amount;
+					cout << "Р’РІРµРґРёС‚Рµ РѕР±СЉС‘Рј С‚РѕРїР»РёРІР°: "; cin >> amount;
 					tank.fill(amount);
 				}
 			case Esc:
@@ -255,7 +255,7 @@ public:
 	}
 	void engine_idle()
 	{
-		//холостой ход двигателя
+		//С…РѕР»РѕСЃС‚РѕР№ С…РѕРґ РґРІРёРіР°С‚РµР»СЏ
 		while (engine.started() && tank.give_fuel(engine.get_consumption_per_second()))
 		{
 			std::this_thread::sleep_for(1s);
@@ -271,7 +271,7 @@ public:
 	}
 	void panel()const
 	{
-		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE); //получаем обработчик окна консоли
+		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE); //РїРѕР»СѓС‡Р°РµРј РѕР±СЂР°Р±РѕС‚С‡РёРє РѕРєРЅР° РєРѕРЅСЃРѕР»Рё
 		while (driver_inside)
 		{
 			system("cls");
@@ -280,10 +280,10 @@ public:
 			if (tank.getFuel_level() < 5)
 			{
 				SetColor(White, Red);
-				//SetConsoleTextAttribute(hConsole, 0xCF);  //  0xCF 'C' красный фон, 'F' - белые буквы
+				//SetConsoleTextAttribute(hConsole, 0xCF);  //  0xCF 'C' РєСЂР°СЃРЅС‹Р№ С„РѕРЅ, 'F' - Р±РµР»С‹Рµ Р±СѓРєРІС‹
 				cout << "LOW FUEL";
 				SetColor(Black, White);
-				//SetConsoleTextAttribute(hConsole, 0xF0);  // чёрный фон серые буквы
+				//SetConsoleTextAttribute(hConsole, 0xF0);  // С‡С‘СЂРЅС‹Р№ С„РѕРЅ СЃРµСЂС‹Рµ Р±СѓРєРІС‹
 			}
 			cout << endl;
 			cout << "Engine:\t" << (engine.started() ? "started" : "stoped") << "\n";
@@ -310,20 +310,20 @@ public:
 
 
 //#define TANK_CHEK
-//некоторым макросам дают только имя, и не дают никакого значения,
-//такие макросы используются с директивами условной компиляции #ifdef ... #endif
+//РЅРµРєРѕС‚РѕСЂС‹Рј РјР°РєСЂРѕСЃР°Рј РґР°СЋС‚ С‚РѕР»СЊРєРѕ РёРјСЏ, Рё РЅРµ РґР°СЋС‚ РЅРёРєР°РєРѕРіРѕ Р·РЅР°С‡РµРЅРёСЏ,
+//С‚Р°РєРёРµ РјР°РєСЂРѕСЃС‹ РёСЃРїРѕР»СЊР·СѓСЋС‚СЃСЏ СЃ РґРёСЂРµРєС‚РёРІР°РјРё СѓСЃР»РѕРІРЅРѕР№ РєРѕРјРїРёР»СЏС†РёРё #ifdef ... #endif
 //#define ENGINE_CHEK	
 void main()
 {
 	setlocale(LC_ALL, "");
-#ifdef TANK_CHEK // если определено TANK_CHEK, то нижеследующий код
-	// до директивы ednif будет виден компилятору
+#ifdef TANK_CHEK // РµСЃР»Рё РѕРїСЂРµРґРµР»РµРЅРѕ TANK_CHEK, С‚Рѕ РЅРёР¶РµСЃР»РµРґСѓСЋС‰РёР№ РєРѕРґ
+	// РґРѕ РґРёСЂРµРєС‚РёРІС‹ ednif Р±СѓРґРµС‚ РІРёРґРµРЅ РєРѕРјРїРёР»СЏС‚РѕСЂСѓ
 	Tank tank(40);
 	tank.info();
 	do
 	{
 		int fuel;
-		cout << "Введите объем топлива: "; cin >> fuel;
+		cout << "Р’РІРµРґРёС‚Рµ РѕР±СЉРµРј С‚РѕРїР»РёРІР°: "; cin >> fuel;
 		tank.fill(fuel);
 		tank.info();
 	} while (_getch() != 27);
